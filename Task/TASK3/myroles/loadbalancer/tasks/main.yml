@@ -1,0 +1,16 @@
+---
+# tasks file for loadbalancer
+
+- name: install haproxy
+  package:
+          name: "haproxy"
+          state: present
+- name: copy conf
+  template:
+          src: "haproxy.cfg"
+          dest: "/etc/haproxy/haproxy.cfg"
+  notify: haproxy restart
+- name: start
+  service:
+          name: "haproxy"
+          state: started
